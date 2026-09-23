@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nekonnect 🐱🐟</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-garden">
+  <div id="powerup-toast"></div>
+
+  <div id="game-container">
+    <!-- Top HUD -->
+    <div id="hud">
+      <div class="hud-pill" id="level-display">
+        <span class="label">Lvl</span>
+        <span id="level" class="val">1</span>
+      </div>
+
+      <div class="hud-pill" id="score-display">
+        <span class="label">Score</span>
+        <span id="score" class="val">0</span>
+        <span class="divider">/</span>
+        <span id="target" class="target-val">280</span>
+      </div>
+
+      <div class="hud-pill" id="moves-display">
+        <span class="label">Moves</span>
+        <span id="moves" class="val">15</span>
+      </div>
+
+      <button id="mute-btn" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">🔊</button>
+    </div>
+
+    <!-- Biome / Environment Badge -->
+    <div id="biome-badge">
+      <span id="biome-icon">🏡</span>
+      <span id="biome-name">Sunny Garden</span>
+    </div>
+
+    <!-- Target Progress Bar -->
+    <div id="progress-bar-container">
+      <div id="progress-fill"></div>
+    </div>
+
+    <!-- Canvas Area -->
+    <div id="canvas-wrapper">
+      <canvas id="game-canvas" width="544" height="544"></canvas>
+      <div id="chain-count">0</div>
+      <div id="chain-info">0 fish</div>
+    </div>
+
+    <!-- Bottom Persistent Power-Ups -->
+    <div id="bottom-bar">
+      <button id="btn-pop" class="powerup-btn" title="Pop all fish adjacent to cat">
+        <span class="btn-icon">🐾</span>
+        <div class="btn-text">
+          <span class="btn-label">Pop Adj</span>
+          <span class="badge" id="count-pop">1</span>
+        </div>
+      </button>
+
+      <button id="btn-shuffle" class="powerup-btn" title="Reshuffle fish colors">
+        <span class="btn-icon">🔀</span>
+        <div class="btn-text">
+          <span class="btn-label">Shuffle</span>
+          <span class="badge" id="count-shuffle">1</span>
+        </div>
+      </button>
+
+      <button id="btn-teleport" class="powerup-btn" title="Teleport cat to any tile">
+        <span class="btn-icon">✨</span>
+        <div class="btn-text">
+          <span class="btn-label">Teleport</span>
+          <span class="badge" id="count-teleport">1</span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Title Screen -->
+  <div id="title-screen">
+    <div class="title-card">
+      <h1 class="title">NEKONNECT</h1>
+      <p class="subtitle">🐱 Connect the fish & satisfy the cat! 🐟</p>
+
+      <div class="instructions">
+        <div class="inst-item">🐾 <b>Cat Anchor</b>: Move chains must start adjacent to the cat!</div>
+        <div class="inst-item">🎯 <b>Limited Moves</b>: Reach the target score before moves run out!</div>
+        <div class="inst-item">👀 <b>Interactive Cat</b>: Watch the cat's eyes follow your cursor everywhere!</div>
+        <div class="inst-item">🧶 <b>Yarn Ball</b>: Color lane switcher (e.g. Blue &rarr; Yarn &rarr; Red)!</div>
+        <div class="inst-item">🩷 <b>Churu</b>: 3&times;3 area burst &nbsp;|&nbsp; 🌿 <b>Catnip</b>: Row &amp; Col strike!</div>
+        <div class="inst-item">🎁 <b>Rare Power-Ups</b>: Save them! Full refills unlock every 5 levels.</div>
+      </div>
+
+      <button id="start-btn">Play!</button>
+    </div>
+  </div>
+
+  <!-- Level Complete Overlay -->
+  <div id="level-complete">
+    <div class="modal-card">
+      <div class="modal-paw">😻</div>
+      <h2>Level Cleared!</h2>
+      <p class="modal-desc">Purr-fect job! The cat is happy and satisfied.</p>
+      
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-title">Level</span>
+          <span id="complete-level" class="stat-val">1</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-title">Score</span>
+          <span id="complete-score" class="stat-val">0</span>
+        </div>
+      </div>
+
+      <div id="reward-notice" class="reward-notice">✨ Next power-up bundle unlocks at Level 5!</div>
+
+      <button id="next-level-btn">Next Level 🐾</button>
+    </div>
+  </div>
+
+  <!-- Game Over Overlay -->
+  <div id="game-over">
+    <div class="modal-card game-over-card">
+      <div class="modal-paw sad-cat">😿</div>
+      <h2>Out of Moves!</h2>
+      <p class="modal-desc">The cat is still hungry! Try again to reach the target score.</p>
+      
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-title">Your Score</span>
+          <span id="fail-score" class="stat-val">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-title">Target</span>
+          <span id="fail-target" class="stat-val">280</span>
+        </div>
+      </div>
+
+      <button id="retry-btn">Try Again 🐾</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
